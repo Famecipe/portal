@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Delete recipe</h1>
+<mat-dialog-content class="mat-typography">
+    <mat-divider></mat-divider>
+    <br/>
+    <p>Deleting a recipe is an irreversible action. Please confirm your deletion.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

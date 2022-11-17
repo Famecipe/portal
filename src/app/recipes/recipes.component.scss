@@ -1,0 +1,128 @@
+.tag-chip-list {
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: end;
+  padding: 0 1rem;
+}
+
+.action-bar button {
+  border-radius: 0;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+mat-grid-list {
+  margin: 1rem 2rem;
+}
+
+// .wrapper {
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   justify-content: center;
+//   padding: 1rem;
+// }
+
+.wrapper {
+  background: rgb(40,40,40, .9);
+  line-height:0;
+  -webkit-column-count:3; /* split it into 5 columns */
+  -webkit-column-gap:5px; /* give it a 5px gap between columns */
+  -moz-column-count:3;
+  -moz-column-gap:5px;
+  column-count:3;
+  column-gap:5px;
+  padding: 5px;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 960px) {
+  .wrapper {
+   -moz-column-count:    2;
+   -webkit-column-count: 2;
+   column-count:         2;
+  }
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+   -moz-column-count:    1;
+   -webkit-column-count: 1;
+   column-count:         1;
+  }
+}
+
+.wrapper .img-container {
+  width: 100% !important;
+  height: auto !important;
+  margin-bottom:5px; /* to match column gap */
+  border-radius: 2px;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  position: relative;
+  background: rgb(40,40,40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .img-container img {
+  display: block;
+}
+
+.wrapper .img-container .overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0,0,0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 1.5rem;
+  padding: 1.75rem 1rem;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.wrapper .img-container .favorite-overlay {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  width: 100%;
+  color: white;
+  font-size: 1.5rem;
+  padding: 1rem 1rem;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.wrapper .img-container:hover .overlay,
+.wrapper .img-container:hover .favorite-overlay {
+  opacity: 1;
+}
+
+// .wrapper mat-card {
+//   width: 45%;
+//   min-width: 350px;
+//   height: 350px;
+//   // margin: 1rem;
+// }
+
+.wrapper mat-card mat-card-footer {
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+}

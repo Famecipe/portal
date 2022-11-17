@@ -1,0 +1,7 @@
+<div class="wrapper">
+  <div class="img-container" *ngFor="let recipe of recipes; let i = index" matRipple>
+    <img class="pointer" async [src]="getImageUrl(recipe)" (click)="onRecipeTap(recipe)" />
+    <div class="overlay">{{recipe.name}}</div>
+    <div *ngIf="isFavorite(recipe)" class="favorite-overlay"><mat-icon>favorite</mat-icon></div>
+  </div>
+</div>

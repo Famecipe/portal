@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>About</h1>
+<mat-dialog-content class="mat-typography">
+  <mat-divider></mat-divider>
+  <br/>
+  <p>Famecipe is a cross-platform application that digitizes recipes. Famecipe streamlines
+    recipe creation, storage, and sharing while maintaining data privacy. Famecipe is not the
+    owner of your recipe data, but rather the mode. You decide who can see your family recipe secrets!</p>
+  <h2>Version</h2>
+  <p style="display: flex; align-items: center;"><span style="display: flex; align-items: center; padding: 0 .25rem;"><mat-icon class="logo-text" svgIcon="famecipe"></mat-icon><img src="../assets/famecipe-text.png" style="height: 1rem;" /></span> {{version}}</p>
+  <h2>Copyright</h2>
+  <p>{{ name + '.com' | uppercase }} &copy; {{ year }} ALL RIGHTS RESERVED.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Ok</button>
+</mat-dialog-actions>

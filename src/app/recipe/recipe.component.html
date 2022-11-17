@@ -1,0 +1,133 @@
+<mat-tab-group color="accent" dynamicHeight mat-align-tabs="center">
+  <mat-tab label="OVERVIEW">
+    <div>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <mat-form-field style="font-size: 1.75rem;" class="full-width" appearance="outline">
+              <mat-label *ngIf="editing">NAME</mat-label>
+              <input style="font-size: 1.75rem; line-height: 1.75rem;" matInput [disabled]="!editing" [(ngModel)]="recipe.name">
+            </mat-form-field>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="margin-top: -2rem; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+          <ngp-image-picker style="width: 100%;" *ngIf="adding" [_config]="imagePickerConf" ($imageChanged)="onImageChange($event)"></ngp-image-picker>
+          <div *ngIf="!adding" style="height: 400px; width: 100%; flex-direction: column; display: flex; place-content: center; align-items: center; position: relative; max-width: 100%!important; border-radius: 2px; box-sizing: border-box; background: black;">
+            <img style="height: 100%; width: auto;" async [src]="getImageUrl()" />
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><span>INGREDIENTS</span><button *ngIf="editing" mat-button (click)="onAddIngredient()"><mat-icon>playlist_add</mat-icon></button></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container *ngFor="let ingredient of recipe.ingredients; let i=index; trackBy: itemCompare;">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>#{{i + 1}}</mat-label>
+              <input matInput [disabled]="!editing" [(ngModel)]="recipe.ingredients && recipe.ingredients[i]">
+              <button *ngIf="editing" (click)="onRemoveIngredient(i)" matSuffix color="primary" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-form-field>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><span>EQUIPMENT</span><button *ngIf="editing" mat-button (click)="onAddEquipment()"><mat-icon>playlist_add</mat-icon></button></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container *ngFor="let equipment of recipe.equipment; let i=index; trackBy: itemCompare;">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>#{{i + 1}}</mat-label>
+              <input matInput [disabled]="!editing" [(ngModel)]="recipe.equipment && recipe.equipment[i]">
+              <button *ngIf="editing" (click)="onRemoveEquipment(i)" matSuffix color="primary" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-form-field>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><span>DIRECTIONS</span><button *ngIf="editing" mat-button (click)="onAddDirection()"><mat-icon>playlist_add</mat-icon></button></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container *ngFor="let direction of recipe.directions; let i=index; trackBy: itemCompare;">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>#{{i + 1}}</mat-label>
+              <input matInput [disabled]="!editing" [(ngModel)]="recipe.directions && recipe.directions[i]">
+              <button *ngIf="editing" (click)="onRemoveDirection(i)" matSuffix color="primary" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-form-field>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="INGREDIENTS">
+    <div>
+      <div class="spacer"></div>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><span>INGREDIENTS</span><button *ngIf="editing" mat-button (click)="onAddIngredient()"><mat-icon>playlist_add</mat-icon></button></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container *ngFor="let ingredient of recipe.ingredients; let i=index; trackBy: itemCompare;">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>#{{i + 1}}</mat-label>
+              <input matInput [disabled]="!editing" [(ngModel)]="recipe.ingredients && recipe.ingredients[i]">
+              <button *ngIf="editing" (click)="onRemoveIngredient(i)" matSuffix color="primary" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-form-field>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="EQUIPMENT">
+    <div>
+      <div class="spacer"></div>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><span>EQUIPMENT</span><button *ngIf="editing" mat-button (click)="onAddEquipment()"><mat-icon>playlist_add</mat-icon></button></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container *ngFor="let equipment of recipe.equipment; let i=index; trackBy: itemCompare;">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>#{{i + 1}}</mat-label>
+              <input matInput [disabled]="!editing" [(ngModel)]="recipe.equipment && recipe.equipment[i]">
+              <button *ngIf="editing" (click)="onRemoveEquipment(i)" matSuffix color="primary" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-form-field>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="DIRECTIONS">
+    <div>
+      <div class="spacer"></div>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><span>DIRECTIONS</span><button *ngIf="editing" mat-button (click)="onAddDirection()"><mat-icon>playlist_add</mat-icon></button></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container *ngFor="let direction of recipe.directions; let i=index; trackBy: itemCompare;">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>#{{i + 1}}</mat-label>
+              <input matInput [disabled]="!editing" [(ngModel)]="recipe.directions && recipe.directions[i]">
+              <button *ngIf="editing" (click)="onRemoveDirection(i)" matSuffix color="primary" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-form-field>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,17 @@
+div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 8rem;
+}
+
+div .code {
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+div .code-text {
+    margin: 0;
+    text-align: center;
+}

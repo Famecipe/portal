@@ -1,0 +1,81 @@
+<nav>
+  <mat-toolbar color="accent" class="mat-elevation-z8">
+    <mat-toolbar-row>
+      <button mat-button [routerLink]="['/']" style="height: 100%;">
+        <mat-icon class="logo-icon" [svgIcon]="name"></mat-icon>
+        <img src="../assets/famecipe-text.png" style="height: 2.25rem;" />
+      </button>
+      <div class="action-bar">
+        <ng-container *ngIf="(isHandset$ | async) === true">
+          <button color="primary" mat-icon-button [matMenuTriggerFor]="mainMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #mainMenu="matMenu">
+            <ng-container *ngFor="let action of appService.actions; let i = index">
+              <button
+                mat-menu-item
+                *ngIf="action.id !== settingsActionId && !action.hidden"
+                color="primary"
+                [ngClass]="{ 'action-padding': true }"
+                [disabled]="action.disabled"
+                [attr.aria-label]="action.ariaLabel"
+                (click)="appService.executeAction(action.id)">
+                <mat-icon>{{ action.icon }}</mat-icon>{{ action.name }}
+              </button>
+            </ng-container>
+            <button mat-menu-item [matMenuTriggerFor]="helpMenu"><mat-icon>help</mat-icon>HELP</button>
+          </mat-menu>
+          <mat-menu #helpMenu="matMenu">
+            <button mat-menu-item (click)="openAboutDialog()"><mat-icon>info</mat-icon>ABOUT</button>
+            <button mat-menu-item (click)="openDocumentationPage()"><mat-icon>open_in_new</mat-icon>DOCUMENTATION</button>
+          </mat-menu>
+        </ng-container>
+        <ng-container *ngIf="(isHandset$ | async) === false">
+          <ng-container *ngFor="let action of appService.actions; let i = index">
+            <button
+              *ngIf="action.id !== settingsActionId && !action.hidden"
+              color="primary"
+              mat-icon-button
+              [ngClass]="{ 'action-padding': true }"
+              [disabled]="action.disabled"
+              [matTooltip]="action.tooltip"
+              [attr.aria-label]="action.ariaLabel"
+              (click)="appService.executeAction(action.id)">
+              <mat-icon>{{action.icon}}</mat-icon>
+            </button>
+            <button
+              *ngIf="action.id === settingsActionId && !action.hidden"
+              [matMenuTriggerFor]="menu"
+              mat-icon-button
+              [disabled]="action.disabled"
+              [matTooltip]="action.tooltip"
+              [attr.aria-label]="action.ariaLabel"
+              (click)="appService.executeAction(action.id)">
+              <mat-icon>{{action.icon}}</mat-icon>
+            </button>
+          </ng-container>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openAboutDialog()"><mat-icon>info</mat-icon>ABOUT</button>
+            <button mat-menu-item (click)="openDocumentationPage()"><mat-icon>open_in_new</mat-icon>DOCUMENTATION</button>
+          </mat-menu>
+        </ng-container>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</nav>
+<mat-sidenav-container class="sidenav-container" [ngClass]="{ handset: (isHandset$ | async) === true }">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      role="navigation"
+      mode="side"
+      [(opened)]="opened"
+      [ngClass]="{ handset: (isHandset$ | async) === true }">
+    <mat-nav-list>
+      <mat-list-item [routerLink]="'favorites'" [matTooltipPosition]="'right'" [matTooltip]="(isHandset$ | async) === true ? '' : 'View favorites'"><mat-icon aria-hidden="false" aria-label="Favorites icon">favorite</mat-icon></mat-list-item>
+      <mat-list-item [routerLink]="'recipes'" [matTooltipPosition]="'right'" [matTooltip]="(isHandset$ | async) === true ? '' : 'View recipes'"><mat-icon style="height: 2.75rem; width: 2.75rem;" aria-hidden="false" aria-label="Recipe icon" svgIcon="famecipe"></mat-icon></mat-list-item>
+      <mat-list-item [routerLink]="'recent'" [matTooltipPosition]="'right'" [matTooltip]="'View recent'"><mat-icon aria-hidden="false" aria-label="Recent icon">history</mat-icon></mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content [style.margin-left]="((isHandset$ | async) === true || (isHandset$ | async) === false && !opened) ? '0px' : '56px'">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

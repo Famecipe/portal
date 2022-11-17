@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "6.2.0",
+    "generators": {
+      "images": {
+        "generatorName": "typescript-angular",
+        "inputSpec": "images.openapi.json",
+        "output": "./openapi/images"
+      },
+      "metadata": {
+        "generatorName": "typescript-angular",
+        "inputSpec": "metadata.openapi.json",
+        "output": "./openapi/metadata"
+      },
+      "recipes": {
+        "generatorName": "typescript-angular",
+        "inputSpec": "recipes.openapi.json",
+        "output": "./openapi/recipes"
+      }
+    }
+  }
+}
