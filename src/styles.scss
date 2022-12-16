@@ -1,0 +1,122 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+$dark-text: #000000;
+$dark-primary-text: rgba($dark-text, 0.87);
+
+$light-text: #ffffff;
+$light-primary-text: $light-text;
+
+body {
+  --primary-color: #282828;
+  --primary-lighter-color: #bfbfbf;
+  --primary-darker-color: #181818;
+  --text-primary-color: #{$light-primary-text};
+  --text-primary-lighter-color: #{$dark-primary-text};
+  --text-primary-darker-color: #{$light-primary-text};
+}   
+$mat-primary: (
+  main: #282828,
+  lighter: #bfbfbf,
+  darker: #181818,
+  200: #282828, // For slide toggle,
+  contrast : (
+    main: $light-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$famecipe-primary: mat.define-palette($mat-primary, main, lighter, darker);
+
+
+body {
+  --accent-color: #bfcbbf;
+  --accent-lighter-color: #ecefec;
+  --accent-darker-color: #a9b8a9;
+  --text-accent-color: #{$dark-primary-text};
+  --text-accent-lighter-color: #{$dark-primary-text};
+  --text-accent-darker-color: #{$dark-primary-text};
+}   
+$mat-accent: (
+  main: #bfcbbf,
+  lighter: #ecefec,
+  darker: #a9b8a9,
+  200: #bfcbbf, // For slide toggle,
+  contrast : (
+    main: $dark-primary-text,
+    lighter: $dark-primary-text,
+    darker: $dark-primary-text,
+  )
+);
+$famecipe-accent: mat.define-palette($mat-accent, main, lighter, darker);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+//$famecipe-primary: mat.define-palette(mat.$indigo-palette);
+//$famecipe-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$famecipe-warn: mat.define-palette(mat.$red-palette);
+
+$famecipe-typography: mat.define-typography-config($font-family: 'CooperHewitt');
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$famecipe-theme: mat.define-light-theme((
+  color: (
+    primary: $famecipe-primary,
+    accent: $famecipe-accent,
+    warn: $famecipe-warn,
+  ),
+  typography: $famecipe-typography
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($famecipe-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: "CooperHewitt";
+  src: url("assets/fonts/CooperHewitt-Medium.woff") format('woff');
+}
+
+@font-face {
+  font-family: "CooperHewitt";
+  src: url("assets/fonts/CooperHewitt-Bold.woff") format('woff');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "CooperHewitt";
+  src: url("assets/fonts/CooperHewitt-BoldItalic.woff") format('woff');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "CooperHewitt";
+  src: url("assets/fonts/CooperHewitt-MediumItalic.woff") format('woff');
+  font-style: italic;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: CooperHewitt }
+
+/* required on iOS to resolve input text color */
+input:disabled{
+  -webkit-text-fill-color: #000000de !important;
+  opacity: 1 !important;
+  color: #000000de !important;
+}
