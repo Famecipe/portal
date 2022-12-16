@@ -1,0 +1,31 @@
+name: Docker Image Build
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Package version'
+        default: ''
+        required: true
+
+jobs:
+  package:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14.x'
+        cache: 'npm'
+    - name: NPM install
+      run: npm install
+    - name: NPM run build
+      run: npm run build
+    - name: Build image
+      run: docker build --tag docker.pkg.github.com/famecipe/portal/famecipe.portal:${{ github.event.inputs.version }} .
+    - name: Docker login
+      run: docker login docker.pkg.github.com -u rjwehrle -p ${{ secrets.FAMECIPE_NUGET }}
+    - name: Docker push
+      run: docker push docker.pkg.github.com/famecipe/portal/famecipe.portal:${{ github.event.inputs.version }}
